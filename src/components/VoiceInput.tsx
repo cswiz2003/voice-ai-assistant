@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
-import { Mic, MicOff } from 'lucide-react';
+import { Mic, MicOff, Square } from 'lucide-react';
 import { startSpeechRecognition, SpeechRecognitionResult } from '@/utils/speechUtils';
 import { useToast } from '@/hooks/use-toast';
 
@@ -14,7 +13,6 @@ const VoiceInput: React.FC<VoiceInputProps> = ({ onTranscript, isProcessing }) =
   const [transcript, setTranscript] = useState('');
   const { toast } = useToast();
   
-  // Stop listening when processing
   useEffect(() => {
     if (isProcessing && isListening) {
       setIsListening(false);
@@ -49,7 +47,6 @@ const VoiceInput: React.FC<VoiceInputProps> = ({ onTranscript, isProcessing }) =
         
         setIsListening(true);
         
-        // Auto stop after 10 seconds as fallback
         setTimeout(() => {
           if (isListening) {
             stopListening();
@@ -74,9 +71,18 @@ const VoiceInput: React.FC<VoiceInputProps> = ({ onTranscript, isProcessing }) =
     }
   };
 
+  const handleStop = () => {
+    if (isListening) {
+      setIsListening(false);
+      if (transcript) {
+        onTranscript(transcript);
+      }
+    }
+  };
+
   return (
     <div className="flex flex-col items-center">
-      <div className="relative mb-2">
+      <div className="relative mb-2 flex items-center gap-4">
         {isListening && (
           <div className="absolute -inset-4">
             <div className="w-full h-full rounded-full bg-chatbot-ai opacity-30 animate-pulse-ring"></div>
@@ -95,6 +101,15 @@ const VoiceInput: React.FC<VoiceInputProps> = ({ onTranscript, isProcessing }) =
           aria-label={isListening ? 'Stop listening' : 'Start listening'}
         >
           {isListening ? <MicOff size={24} /> : <Mic size={24} />}
+        </button>
+        
+        <button
+          onClick={handleStop}
+          disabled={!isListening}
+          className="w-10 h-10 rounded-full flex items-center justify-center bg-red-500 text-white hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed"
+          aria-label="Stop recording"
+        >
+          <Square size={16} />
         </button>
       </div>
       
