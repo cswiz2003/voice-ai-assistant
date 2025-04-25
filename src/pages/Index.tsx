@@ -8,7 +8,7 @@ import { getAIResponse } from '@/utils/aiUtils';
 import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/components/AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
-import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
+import { SidebarProvider } from '@/components/ui/sidebar';
 import ChatSidebar from '@/components/ChatSidebar';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
@@ -164,10 +164,7 @@ const Index: React.FC = () => {
             onNewChat={handleNewChat}
             currentChatId={currentChatId}
           />
-          <main className="flex-1 flex flex-col max-w-3xl mx-auto w-full relative">
-            <div className="absolute top-4 left-4">
-              <SidebarTrigger />
-            </div>
+          <main className="flex-1 flex flex-col max-w-3xl mx-auto w-full">
             <ChatContainer messages={messages} />
             <div className="border-t border-gray-200 p-4 space-y-4">
               <TextInput 
