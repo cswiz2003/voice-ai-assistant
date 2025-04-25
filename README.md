@@ -8,14 +8,13 @@ A modern, responsive web application that enables seamless voice and text intera
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
 
 </div>
 
 ## ✨ Features
 
 - 🎤 **Advanced Voice Input**: Real-time speech recognition with confidence levels and automatic silence detection
-- 🤖 **AI-Powered Responses**: Intelligent conversation handling with context awareness
+- 🤖 **AI-Powered Responses**: Intelligent conversation handling with Hugging Face integration and robust error handling
 - 🔊 **Text-to-Speech**: High-quality voice synthesis for AI responses
 - 🎯 **Real-time Updates**: Instant message synchronization using Supabase's real-time capabilities
 - 📱 **Modern Responsive Design**: Sleek UI that works seamlessly across all devices
@@ -24,6 +23,7 @@ A modern, responsive web application that enables seamless voice and text intera
 - 🎨 **Beautiful UI Components**: Using shadcn/ui for a consistent and modern look
 - 🌓 **Theme Support**: Light and dark mode with system preference detection
 - ⚡ **Optimized Performance**: Built with Vite for lightning-fast development and production builds
+- 🛡️ **Robust Error Handling**: Graceful handling of AI service interruptions and API issues
 
 ## 🛠️ Tech Stack
 
@@ -42,6 +42,12 @@ A modern, responsive web application that enables seamless voice and text intera
 - **Server State**: TanStack Query (React Query) v5 for efficient data fetching
 - **Local State**: React Context for auth and theme management
 - **Real-time**: Supabase real-time subscriptions
+
+### AI Integration
+- **Model Provider**: Hugging Face's Inference API
+- **Model**: google/flan-t5-base for reliable chat responses
+- **Error Handling**: Comprehensive error management with graceful fallbacks
+- **Voice Processing**: Web Speech API with advanced error recovery
 
 ### Backend & Infrastructure
 - **Database & Auth**: Supabase for:
@@ -151,6 +157,13 @@ src/
 - Code syntax highlighting
 - Image and link previews
 - Voice playback for AI responses
+
+### AI Integration
+- Hugging Face API integration
+- Intelligent error handling and recovery
+- Graceful degradation during service interruptions
+- User-friendly error messages
+- Comprehensive logging for debugging
 
 ### Authentication & Security
 - Email/password authentication

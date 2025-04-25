@@ -26,6 +26,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
 } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
 
@@ -222,6 +223,9 @@ const ChatSidebar = ({ onSelectChat, onNewChat, currentChatId }: ChatSidebarProp
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Rename Chat</DialogTitle>
+            <DialogDescription>
+              Enter a new name for your chat conversation.
+            </DialogDescription>
           </DialogHeader>
           <form onSubmit={handleSubmitRename} className="space-y-4">
             <Input
