@@ -5,7 +5,6 @@ import { componentTagger } from 'lovable-tagger';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/voice-ai-assistant/',
   plugins: [
     react(),
     process.env.NODE_ENV === 'development' && componentTagger(),
