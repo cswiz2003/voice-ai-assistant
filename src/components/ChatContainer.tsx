@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect } from 'react';
 import ChatMessage, { MessageType } from './ChatMessage';
 
@@ -21,10 +20,10 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ messages }) => {
   }, [messages]);
 
   return (
-    <div className="flex-1 overflow-y-auto p-4">
+    <div className="flex-1 overflow-y-auto p-4 pt-16"> {/* Added pt-16 for extra top padding */}
       {messages.length === 0 ? (
         <div className="h-full flex flex-col items-center justify-center text-gray-400">
-          <p className="text-center text-lg mb-2">Welcome to Voice AI Chat</p>
+          <p className="text-center text-lg mb-2">Welcome to Voice AI Chat vibe coded by Shafique w/ VS Code & Lovable.</p>
           <p className="text-center text-sm">Click the microphone below to start speaking</p>
         </div>
       ) : (
