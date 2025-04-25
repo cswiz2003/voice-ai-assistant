@@ -158,13 +158,13 @@ const Index: React.FC = () => {
     <SidebarProvider>
       <div className="flex flex-col h-screen bg-gray-50 w-full">
         <Header />
-        <div className="flex flex-1 overflow-hidden">
+        <div className="flex flex-1 overflow-hidden pt-20">{/* pt-20 matches header height */}
           <ChatSidebar 
             onSelectChat={handleSelectChat}
             onNewChat={handleNewChat}
             currentChatId={currentChatId}
           />
-          <main className="flex-1 flex flex-col max-w-3xl mx-auto w-full">
+          <main className="flex-1 flex flex-col max-w-3xl mx-auto w-full min-h-0">
             <ChatContainer messages={messages} />
             <div className="border-t border-gray-200 p-4 space-y-4">
               <TextInput 
