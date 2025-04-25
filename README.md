@@ -1,4 +1,3 @@
-
 # Voice AI Assistant
 
 A responsive web application that enables voice and text interactions with an AI assistant, featuring real-time speech recognition, chat history, and user authentication.
@@ -58,7 +57,7 @@ A responsive web application that enables voice and text interactions with an AI
    npm run dev
    ```
 
-   The app will be available at `http://localhost:5173`
+   The app will be available at `http://localhost:<port>` (default: 5173).
 
 ### Supabase Configuration
 
@@ -85,7 +84,13 @@ A responsive web application that enables voice and text interactions with an AI
 
 The project uses the following Supabase configuration:
 - Project URL: `https://kfakbcbogixcktvsvgwq.supabase.co`
-- Anon Key: Available in the Supabase dashboard
+- Anon Key: **Add your Anon Key to an `.env` file** (do not share it publicly).
+
+Example `.env` file:
+```
+VITE_SUPABASE_URL=https://kfakbcbogixcktvsvgwq.supabase.co
+VITE_SUPABASE_ANON_KEY=your-anon-key-here
+```
 
 ## Project Structure
 
