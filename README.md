@@ -1,6 +1,8 @@
-# Voice AI Assistant 🎙️ 
+# Voice AI Agent 🎙️ 
 
-A modern, responsive web application that enables seamless voice and text interactions with an AI assistant. Built with cutting-edge technologies and best practices in mind, featuring real-time speech recognition, chat history management, and secure user authentication.
+> Vibe coded with Lovable and VS Code Agent Mode 🚀
+
+A cutting-edge web application that brings voice interaction to life through AI. Built using modern web technologies, this app seamlessly combines voice recognition, AI-powered conversations, and real-time updates to create an intuitive and responsive chat experience. The project leverages the power of Hugging Face's open-source models, Supabase's real-time capabilities, and a robust frontend stack for a smooth user experience.
 
 <div align="center">
 
@@ -8,67 +10,56 @@ A modern, responsive web application that enables seamless voice and text intera
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
+![Hugging Face](https://img.shields.io/badge/Hugging%20Face-FFE033?style=for-the-badge&logo=huggingface&logoColor=black)
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 
 </div>
 
 ## ✨ Features
 
-- 🎤 **Advanced Voice Input**: Real-time speech recognition with confidence levels and automatic silence detection
-- 🤖 **AI-Powered Responses**: Intelligent conversation handling with Hugging Face integration and robust error handling
-- 🔊 **Text-to-Speech**: High-quality voice synthesis for AI responses
-- 🎯 **Real-time Updates**: Instant message synchronization using Supabase's real-time capabilities
-- 📱 **Modern Responsive Design**: Sleek UI that works seamlessly across all devices
-- 🔐 **Secure Authentication**: Robust user authentication system via Supabase
-- 📜 **Persistent Chat History**: Complete chat history management with editing capabilities
-- 🎨 **Beautiful UI Components**: Using shadcn/ui for a consistent and modern look
-- 🌓 **Theme Support**: Light and dark mode with system preference detection
-- ⚡ **Optimized Performance**: Built with Vite for lightning-fast development and production builds
-- 🛡️ **Robust Error Handling**: Graceful handling of AI service interruptions and API issues
+- 🎤 **Voice Input**: Advanced real-time speech recognition with confidence scoring
+- 🤖 **HuggingFace Integration**: Powered by google/flan-t5-base model for intelligent responses
+- 🔊 **Speech to Text & TTS**: Seamless voice-to-text and text-to-speech capabilities
+- 🔄 **Real-time Updates**: Instant message synchronization via Supabase
+- 🔐 **Authentication**: Secure user authentication with Supabase
+- 💾 **Persistent Chat History**: Complete message history with edit capabilities
+- 🎨 **Shadcn UI**: Beautiful and accessible component library
+- ⚡ **Vite**: Lightning-fast development and production builds
+- 🛡️ **Error Handling**: Robust error management with graceful fallbacks
 
 ## 🛠️ Tech Stack
 
-### Frontend Core
-- **Framework**: React 18 with TypeScript for type-safe development
-- **Build Tool**: Vite for ultra-fast development and optimized builds
-- **Routing**: React Router v6 with protected routes and lazy loading
+### Frontend
+- React 18 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- shadcn/ui components
+- React Router v6
+- TanStack Query v5
+- Lucide React icons
 
-### Styling & UI
-- **CSS Framework**: Tailwind CSS for utility-first styling
-- **Component Library**: shadcn/ui for beautiful, accessible components
-- **Icons**: Lucide React for consistent, scalable icons
-- **Animations**: Tailwind's built-in animations and custom keyframes
-
-### State Management & Data Fetching
-- **Server State**: TanStack Query (React Query) v5 for efficient data fetching
-- **Local State**: React Context for auth and theme management
-- **Real-time**: Supabase real-time subscriptions
-
-### AI Integration
-- **Model Provider**: Hugging Face's Inference API
-- **Model**: google/flan-t5-base for reliable chat responses
-- **Error Handling**: Comprehensive error management with graceful fallbacks
-- **Voice Processing**: Web Speech API with advanced error recovery
-
-### Backend & Infrastructure
-- **Database & Auth**: Supabase for:
+### Backend
+- Supabase Backend-as-a-Service
   - PostgreSQL database
   - Real-time subscriptions
+  - Authentication
   - Row Level Security (RLS)
-  - OAuth integration
-  - File storage
 
-### Developer Experience
-- **Type Safety**: TypeScript with strict mode
-- **Code Quality**:
-  - ESLint for code linting
-  - Prettier for code formatting
-  - Husky for git hooks
-- **Package Manager**: Bun for ultra-fast dependency management
+### AI Integration
+- Hugging Face Inference API
+- Model: google/flan-t5-base
+- Web Speech API for voice processing
 
-## Getting Started
+### Infrastructure
+- TypeScript with strict mode
+- ESLint & Prettier
+- Vercel for deployment
+- Bun package manager
+
+## 🚀 Getting Started
 
 ### Prerequisites
-
 - Node.js (v18 or later)
 - npm or yarn
 - A Supabase account
@@ -91,14 +82,13 @@ A modern, responsive web application that enables seamless voice and text intera
    npm run dev
    ```
 
-   The app will be available at `http://localhost:<port>` (default: 5173).
+   The app will be available at `http://localhost:5173`.
 
-### Supabase Configuration
+### Supabase & Environment Setup
 
 1. Create a new Supabase project at [https://supabase.com](https://supabase.com)
 
-2. The project already includes the following tables:
-   - `chat_messages`: Stores chat history
+2. Set up the required table:
    ```sql
    chat_messages (
      id uuid PRIMARY KEY,
@@ -109,76 +99,38 @@ A modern, responsive web application that enables seamless voice and text intera
    )
    ```
 
-3. Set up authentication:
-   - Enable Email/Password authentication
-   - Configure Google OAuth (optional)
-   - Set your site URL and redirect URLs in Authentication > URL Configuration
+3. Configure your environment:
+   Create a `.env` file with:
+   ```
+   VITE_SUPABASE_URL=your-project-url
+   VITE_SUPABASE_ANON_KEY=your-anon-key
+   ```
 
-### Environment Setup
+### Deployment
 
-The project uses the following Supabase configuration:
-- Project URL: `https://kfakbcbogixcktvsvgwq.supabase.co`
-- Anon Key: **Add your Anon Key to an `.env` file** (do not share it publicly).
+The application is deployed on Vercel for optimal performance and reliability. To deploy your own instance:
 
-Example `.env` file:
-```
-VITE_SUPABASE_URL=https://kfakbcbogixcktvsvgwq.supabase.co
-VITE_SUPABASE_ANON_KEY=your-anon-key-here
-```
+1. Push your code to GitHub
+2. Import your repository on [Vercel](https://vercel.com)
+3. Configure your environment variables
+4. Deploy!
 
-## 🏗️ Project Structure
+Your app will be live at `https://your-project.vercel.app`
+
+## 📁 Project Structure
 
 ```
 src/
 ├── components/          # React components
 │   ├── ui/             # shadcn/ui components
-│   ├── ChatContainer   # Chat interface components
+│   ├── ChatContainer   # Chat interface
 │   ├── VoiceInput      # Speech recognition
 │   └── TextInput       # Text input handling
 ├── hooks/              # Custom React hooks
-├── integrations/       # External integrations
+├── integrations/       # External service integrations
 ├── pages/             # Route components
 └── utils/             # Utility functions
 ```
-
-## 🚀 Key Features in Detail
-
-### Voice Recognition System
-- Web Speech API integration with error handling
-- Real-time transcription with confidence scoring
-- Automatic silence detection
-- Visual feedback during recording
-- Mobile-friendly voice input
-
-### Chat Interface
-- Real-time message updates
-- Message edit & delete capabilities
-- Markdown support in messages
-- Code syntax highlighting
-- Image and link previews
-- Voice playback for AI responses
-
-### AI Integration
-- Hugging Face API integration
-- Intelligent error handling and recovery
-- Graceful degradation during service interruptions
-- User-friendly error messages
-- Comprehensive logging for debugging
-
-### Authentication & Security
-- Email/password authentication
-- OAuth providers support
-- Session persistence
-- Protected routes
-- Row Level Security (RLS)
-- CORS configuration
-
-### Performance Optimizations
-- Code splitting and lazy loading
-- Image optimization
-- Efficient re-rendering with React.memo
-- Debounced input handling
-- Optimistic UI updates
 
 ## 🌟 Coming Soon
 
@@ -196,7 +148,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 <div align="center">
 
-Vibe Coded with ❤️ using [React](https://reactjs.org/), [Vite](https://vitejs.dev/), and [Supabase](https://supabase.io/)
+Vibe Coded with ❤️ using [Lovable](https://lovable.dev), [VS Code Agent Mode](https://marketplace.visualstudio.com/items?itemName=CodeAgent.agent-mode), [Hugging Face](https://huggingface.co/), and [Supabase](https://supabase.io/)
 
 </div>
 
