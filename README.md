@@ -2,7 +2,7 @@
 
 > Vibe coded with Lovable and VS Code Agent Mode 🚀
 
-A cutting-edge web application that brings voice interaction to life through AI. Built using modern web technologies, this app seamlessly combines voice recognition, AI-powered conversations, and real-time updates to create an intuitive and responsive chat experience. The project leverages the power of Hugging Face's open-source models, Supabase's real-time capabilities, and a robust frontend stack for a smooth user experience.
+A cutting-edge web application that brings voice interaction to life through AI. Built using modern web technologies, this app seamlessly combines voice recognition, AI-powered conversations, and real-time updates to create an intuitive and responsive chat experience. The project leverages Google's powerful Gemini model, Supabase's real-time capabilities, and a robust frontend stack for a smooth user experience.
 
 <div align="center">
 
@@ -11,7 +11,7 @@ A cutting-edge web application that brings voice interaction to life through AI.
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
-![Hugging Face](https://img.shields.io/badge/Hugging%20Face-FFE033?style=for-the-badge&logo=huggingface&logoColor=black)
+![Google Gemini](https://img.shields.io/badge/Google_Gemini-4285F4?style=for-the-badge&logo=google&logoColor=white)
 ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 
 </div>
@@ -19,7 +19,7 @@ A cutting-edge web application that brings voice interaction to life through AI.
 ## ✨ Features
 
 - 🎤 **Voice Input**: Advanced real-time speech recognition with confidence scoring
-- 🤖 **HuggingFace Integration**: Powered by google/flan-t5-base model for intelligent responses
+- 🤖 **Google Gemini Integration**: Powered by gemini-1.5-flash-8b model for intelligent responses
 - 🔊 **Speech to Text & TTS**: Seamless voice-to-text and text-to-speech capabilities
 - 🔄 **Real-time Updates**: Instant message synchronization via Supabase
 - 🔐 **Authentication**: Secure user authentication with Supabase
@@ -47,8 +47,8 @@ A cutting-edge web application that brings voice interaction to life through AI.
   - Row Level Security (RLS)
 
 ### AI Integration
-- Hugging Face Inference API
-- Model: google/flan-t5-base
+- Google Generative AI SDK
+- Model: gemini-1.5-flash-8b
 - Web Speech API for voice processing
 
 ### Infrastructure
@@ -148,7 +148,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 <div align="center">
 
-Vibe Coded with ❤️ using [Lovable](https://lovable.dev), [VS Code Agent Mode](https://marketplace.visualstudio.com/items?itemName=CodeAgent.agent-mode), [Hugging Face](https://huggingface.co/), and [Supabase](https://supabase.io/)
+Vibe Coded with ❤️ using [Lovable](https://lovable.dev), [VS Code Agent Mode](https://marketplace.visualstudio.com/items?itemName=CodeAgent.agent-mode), [Google Generative AI](https://ai.google.dev/), and [Supabase](https://supabase.io/)
 
 </div>
 
