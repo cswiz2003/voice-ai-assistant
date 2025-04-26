@@ -1,6 +1,7 @@
-import { HfInference } from '@huggingface/inference';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
-const hf = new HfInference(import.meta.env.VITE_HUGGING_FACE_API_TOKEN);
+// Initialize the Google AI client
+const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GOOGLE_API_KEY);
 
 const IDENTITY_KEYWORDS = ['who are you', 'what model', 'what llm', 'how were you built', 'who made you', 'who created you'];
 const MAX_RESPONSE_LENGTH = 500;
@@ -9,20 +10,15 @@ const RETRY_DELAY = 1000;
 
 const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
-const getIdentityResponse = () => {
-  return "I was built by Shafique (Github: cswiz2003). He vibe coded this whole app with VS Code's Agent mode and Lovable. You can learn more about this project by going to github repo and read readme.md file.";
+// System instructions for the AI
+const SYSTEM_INSTRUCTIONS = {
+  identity: "I am a Voice-enabled AI Agent developed by Shafique (Github: cswiz2003). I was created using VS Code's Agent mode and Lovable framework through an innovative vibe coding approach. You can explore this project in detail by visiting our GitHub repository's README.md file.",
+  responseLength: "Responses are optimized for clarity and brevity, limited to 250 characters.",
+  purpose: "I represent a successful implementation of vibe coding methodology, demonstrating its effectiveness in creating intuitive AI interactions."
 };
 
-const createPrompt = (userMessage: string) => {
-  const conversation = [
-    "Context: You are a helpful AI assistant. Be friendly and concise.",
-    "Human: Hi there!",
-    "Assistant: Hello! How can I help you today?",
-    `Human: ${userMessage}`,
-    "Assistant:"
-  ].join("\n");
-  
-  return conversation;
+const getIdentityResponse = () => {
+  return SYSTEM_INSTRUCTIONS.identity;
 };
 
 async function withRetry<T>(fn: () => Promise<T>, retries = MAX_RETRIES): Promise<T> {
@@ -39,8 +35,8 @@ async function withRetry<T>(fn: () => Promise<T>, retries = MAX_RETRIES): Promis
 
 export const getAIResponse = async (userMessage: string): Promise<string> => {
   try {
-    if (!import.meta.env.VITE_HUGGING_FACE_API_TOKEN) {
-      throw new Error('API token not configured');
+    if (!import.meta.env.VITE_GOOGLE_API_KEY) {
+      throw new Error('Google API token not configured');
     }
 
     // Check if the user is asking about identity
@@ -54,18 +50,45 @@ export const getAIResponse = async (userMessage: string): Promise<string> => {
       return "Hello! How can I help you today?";
     }
 
-    // Using the correct API method for text generation
-    const response = await withRetry(() => hf.textGeneration({
-      model: 'tiiuae/falcon-7b-instruct',
-      inputs: createPrompt(userMessage),
-    }));
+    // Get the model
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-8b" });
 
-    let aiResponse = response.generated_text || "I apologize, but I couldn't generate a proper response.";
-    
+    // Create chat history with system instructions
+    const history = [
+      {
+        role: "user",
+        parts: [{ text: "Hi, I need your help today." }]
+      },
+      {
+        role: "model",
+        parts: [{ text: "Hello! I'm here to help. What can I assist you with?" }]
+      }
+    ];
+
+    // Start chat with system instructions
+    const chat = model.startChat({
+      history,
+      generationConfig: {
+        maxOutputTokens: 500, // Enforcing shorter responses
+      },
+    });
+
+    // Send message with system instructions
+    const result = await withRetry(async () => {
+      const response = await chat.sendMessage([
+        { 
+          text: `${SYSTEM_INSTRUCTIONS.responseLength}\n${SYSTEM_INSTRUCTIONS.purpose}\n${userMessage}` 
+        }
+      ]);
+      return response.response;
+    });
+
+    let aiResponse = result.text();
+
     // Clean up the response
     aiResponse = aiResponse
       .replace(/Human:|Assistant:|Context:/gi, '')
-      .replace(/<\|endoftext\|\>/g, '')
+      .replace(/<\|endoftext\|>/g, '')
       .replace(/\n/g, ' ')
       .trim();
     
@@ -99,13 +122,10 @@ export const getAIResponse = async (userMessage: string): Promise<string> => {
     
     if (error instanceof Error) {
       const errorMessage = error.message.toLowerCase();
-      if (errorMessage.includes('api token')) {
-        return "There seems to be an issue with the AI service authentication. Please try again in a moment.";
+      if (errorMessage.includes('api token') || errorMessage.includes('api key')) {
+        return "There seems to be an issue with the Google API authentication. Please check your API key configuration.";
       }
-      if (errorMessage.includes('inference provider') || errorMessage.includes('model not found')) {
-        return "The AI service is temporarily unavailable. Please try again in a moment.";
-      }
-      if (errorMessage.includes('rate limit')) {
+      if (errorMessage.includes('quota') || errorMessage.includes('rate limit')) {
         return "We've hit the rate limit. Please wait a moment before trying again.";
       }
     }
