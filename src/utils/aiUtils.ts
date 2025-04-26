@@ -54,17 +54,10 @@ export const getAIResponse = async (userMessage: string): Promise<string> => {
       return "Hello! How can I help you today?";
     }
 
-    // Using google/flan-t5-base model which is more reliable for chat
-    const response = await withRetry(() => hf.text2textGeneration({
-      model: 'google/flan-t5-base',
+    // Using the correct API method for text generation
+    const response = await withRetry(() => hf.textGeneration({
+      model: 'tiiuae/falcon-7b-instruct',
       inputs: createPrompt(userMessage),
-      parameters: {
-        max_new_tokens: 100,
-        temperature: 0.7,
-        top_p: 0.95,
-        repetition_penalty: 1.2,
-        do_sample: true
-      },
     }));
 
     let aiResponse = response.generated_text || "I apologize, but I couldn't generate a proper response.";

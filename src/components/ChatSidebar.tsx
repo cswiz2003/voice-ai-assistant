@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
+import { useTheme } from 'next-themes';
 import {
   Sidebar,
   SidebarContent,
@@ -50,11 +51,10 @@ const ChatSidebar = ({ onSelectChat, onNewChat, currentChatId }: ChatSidebarProp
   const [isRenaming, setIsRenaming] = useState(false);
   const [selectedChat, setSelectedChat] = useState<Chat | null>(null);
   const [newTitle, setNewTitle] = useState('');
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   const toggleDarkMode = () => {
-    setIsDarkMode((prev) => !prev);
-    document.documentElement.classList.toggle('dark', !isDarkMode);
+    setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
   const { data: chats } = useQuery({
@@ -147,7 +147,7 @@ const ChatSidebar = ({ onSelectChat, onNewChat, currentChatId }: ChatSidebarProp
             className="ml-2 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
             aria-label="Toggle Dark Mode"
           >
-            {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+            {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
           </button>
         </div>
       </SidebarHeader>
