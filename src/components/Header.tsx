@@ -14,12 +14,14 @@ const Header: React.FC = () => {
 
   return (
     <header className="border-b border-gray-200 p-4 bg-gradient-to-r from-[hsl(187,100%,42%)] to-[hsl(187,40%,20%)] text-white">
-      <div className="container mx-auto relative flex items-center">
-        <div className="absolute left-0 top-1/2 -translate-y-1/2 flex items-center justify-center h-10 w-10">
+      <div className="container mx-auto flex items-center justify-between px-4">
+        <div className="w-24 flex justify-start">
           <SidebarTrigger className="text-white hover:text-white/90" />
         </div>
-        <h1 className="text-xl font-bold text-center flex-1">Voice AI Agent</h1>
-        <div>
+        
+        <h1 className="text-xl font-bold font-['Poppins'] flex-shrink-0">Voice AI Agent</h1>
+        
+        <div className="w-24 flex justify-end">
           <Button 
             variant="ghost" 
             size="sm" 

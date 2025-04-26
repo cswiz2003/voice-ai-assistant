@@ -11,9 +11,17 @@ const Auth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false);  // Track whether user is signing up or signing in
   const navigate = useNavigate();
   const { toast } = useToast();
   const { user } = useAuth();
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !isLoading && email && password) {
+      e.preventDefault();
+      handleAuth(isSignUp);
+    }
+  };
 
   useEffect(() => {
     // Redirect to home if already authenticated
@@ -67,6 +75,7 @@ const Auth = () => {
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              onKeyPress={handleKeyPress}
               disabled={isLoading}
             />
             <Input
@@ -74,12 +83,16 @@ const Auth = () => {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onKeyPress={handleKeyPress}
               disabled={isLoading}
             />
             <div className="flex gap-4">
               <Button
                 className="flex-1"
-                onClick={() => handleAuth(false)}
+                onClick={() => {
+                  setIsSignUp(false);
+                  handleAuth(false);
+                }}
                 disabled={isLoading}
               >
                 {isLoading ? 'Loading...' : 'Sign In'}
@@ -87,7 +100,10 @@ const Auth = () => {
               <Button
                 className="flex-1"
                 variant="outline"
-                onClick={() => handleAuth(true)}
+                onClick={() => {
+                  setIsSignUp(true);
+                  handleAuth(true);
+                }}
                 disabled={isLoading}
               >
                 {isLoading ? 'Loading...' : 'Sign Up'}

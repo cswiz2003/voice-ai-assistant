@@ -14,7 +14,6 @@ const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 const SYSTEM_INSTRUCTIONS = {
   identity: "I am a Voice-enabled AI Agent developed by Shafique (Github: cswiz2003). I was created using VS Code's Agent mode and Lovable framework through an innovative vibe coding approach. You can explore this project in detail by visiting our GitHub repository's README.md file.",
   responseLength: "Responses are optimized for clarity and brevity, limited to 250 characters.",
-  purpose: "I represent a successful implementation of vibe coding methodology, demonstrating its effectiveness in creating intuitive AI interactions."
 };
 
 const getIdentityResponse = () => {

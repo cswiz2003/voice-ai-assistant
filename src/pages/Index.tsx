@@ -91,13 +91,15 @@ const Index: React.FC = () => {
     }
 
     // Create a new chat if there isn't one
-    if (!currentChatId) {
+    let chatId = currentChatId;
+    if (!chatId) {
       const newChatId = await createNewChat();
       if (!newChatId) return;
+      chatId = newChatId;
       setCurrentChatId(newChatId);
     }
     
-    // Add user message
+    // Add user message to UI
     const userMessage: Message = {
       text,
       type: 'user',
@@ -110,7 +112,7 @@ const Index: React.FC = () => {
       text,
       type: 'user',
       user_id: user.id,
-      chat_id: currentChatId
+      chat_id: chatId
     });
     
     // Process AI response
@@ -118,7 +120,7 @@ const Index: React.FC = () => {
     try {
       const aiResponse = await getAIResponse(text);
       
-      // Add AI message
+      // Add AI message to UI
       const aiMessage: Message = {
         text: aiResponse,
         type: 'ai',
@@ -131,7 +133,7 @@ const Index: React.FC = () => {
         text: aiResponse,
         type: 'ai',
         user_id: user.id,
-        chat_id: currentChatId
+        chat_id: chatId
       });
 
       // Update chat title after first exchange if it's a new chat
@@ -140,7 +142,7 @@ const Index: React.FC = () => {
         await supabase
           .from('chats')
           .update({ title: text.slice(0, 50) })
-          .eq('id', currentChatId);
+          .eq('id', chatId);
         queryClient.invalidateQueries({ queryKey: ['chats'] });
       }
     } catch (error) {
